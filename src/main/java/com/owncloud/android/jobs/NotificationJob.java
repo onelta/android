@@ -161,15 +161,31 @@ public class NotificationJob extends Job {
         RichObject file = notification.subjectRichParameters.get("file");
 
         Intent intent;
-        if (file == null) {
-            intent = new Intent(context, NotificationsActivity.class);
+        if ("deck".equalsIgnoreCase(notification.app)) {
+            Intent deckIntent = new Intent();
+            deckIntent.setClassName("it.niedermann.nextcloud.deck.gplay", "it.niedermann.nextcloud.deck.ui" +
+                ".PushNotificationActivity");
+            if (context.getPackageManager().resolveActivity(deckIntent, 0) != null) {
+                intent = new Intent();
+                intent.setClassName("it.niedermann.nextcloud.deck.gplay", "it.niedermann.nextcloud.deck.ui" +
+                    ".PushNotificationActivity");
+                intent.putExtra("account", user.getAccountName());
+                intent.putExtra("nid", notification.notificationId);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            } else {
+                intent = new Intent(context, NotificationsActivity.class);
+            }
         } else {
-            intent = new Intent(context, FileDisplayActivity.class);
-            intent.setAction(Intent.ACTION_VIEW);
-            intent.putExtra(FileDisplayActivity.KEY_FILE_ID, file.id);
+            if (file == null) {
+                intent = new Intent(context, NotificationsActivity.class);
+            } else {
+                intent = new Intent(context, FileDisplayActivity.class);
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.putExtra(FileDisplayActivity.KEY_FILE_ID, file.id);
+            }
+            intent.putExtra(KEY_NOTIFICATION_ACCOUNT, user.getAccountName());
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         }
-        intent.putExtra(KEY_NOTIFICATION_ACCOUNT, user.getAccountName());
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_ONE_SHOT);
         int pushNotificationId = randomId.nextInt();
