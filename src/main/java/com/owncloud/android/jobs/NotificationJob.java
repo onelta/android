@@ -163,14 +163,22 @@ public class NotificationJob extends Job {
         Intent intent;
         if ("deck".equalsIgnoreCase(notification.app)) {
             Intent deckIntent = new Intent();
-            deckIntent.setClassName("it.niedermann.nextcloud.deck.gplay", "it.niedermann.nextcloud.deck.ui" +
+            // TODO find a way to deal with different applicationIdSuffixes .play, .dev and empty-string
+            deckIntent.setClassName("it.niedermann.nextcloud.deck.dev", "it.niedermann.nextcloud.deck.ui" +
                 ".PushNotificationActivity");
             if (context.getPackageManager().resolveActivity(deckIntent, 0) != null) {
                 intent = new Intent();
-                intent.setClassName("it.niedermann.nextcloud.deck.gplay", "it.niedermann.nextcloud.deck.ui" +
+                intent.setClassName("it.niedermann.nextcloud.deck.dev", "it.niedermann.nextcloud.deck.ui" +
                     ".PushNotificationActivity");
                 intent.putExtra("account", user.getAccountName());
-                intent.putExtra("nid", notification.notificationId);
+                intent.putExtra("link", notification.getLink());
+                intent.putExtra("objectId", notification.getObjectId());
+                intent.putExtra("subject", notification.getSubject());
+                intent.putExtra("subjectRich", notification.getSubjectRich());
+                intent.putExtra("message", notification.getMessage());
+                intent.putExtra("messageRich", notification.getMessageRich());
+                intent.putExtra("user", notification.getUser());
+                intent.putExtra("nid", notification.getNotificationId());
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             } else {
                 intent = new Intent(context, NotificationsActivity.class);
