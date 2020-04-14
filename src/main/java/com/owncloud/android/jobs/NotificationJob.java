@@ -97,6 +97,7 @@ public class NotificationJob extends Job {
     private static final String KEY_NOTIFICATION_ACTION_TYPE = "KEY_NOTIFICATION_ACTION_TYPE";
     private static final String PUSH_NOTIFICATION_ID = "PUSH_NOTIFICATION_ID";
     private static final String NUMERIC_NOTIFICATION_ID = "NUMERIC_NOTIFICATION_ID";
+    private static final String DECK = "deck";
 
     private Context context;
     private UserAccountManager accountManager;
@@ -162,7 +163,7 @@ public class NotificationJob extends Job {
         RichObject file = notification.subjectRichParameters.get("file");
 
         Intent intent;
-        if ("deck".equalsIgnoreCase(notification.app)) {
+        if (DECK.equalsIgnoreCase(notification.app)) {
             intent = getDeckIntent(notification, user);
             if (intent == null) { // Fallback if Deck app is not installed
                 intent = new Intent(context, NotificationsActivity.class);
