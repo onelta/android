@@ -25,6 +25,7 @@
 package com.owncloud.android.jobs;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.evernote.android.job.Job;
 import com.evernote.android.job.JobCreator;
@@ -68,17 +69,14 @@ public class NCJobCreator implements JobCreator {
 
     @Override
     public Job create(@NonNull String tag) {
-        switch (tag) {
-            case AccountRemovalJob.TAG:
-                return new AccountRemovalJob(uploadsStorageManager,
-                                             accountManager,
-                                             backgroundJobManager,
-                                             clock,
-                                             eventBus);
-            case NotificationJob.TAG:
-                return new NotificationJob(context, accountManager);
-            default:
-                return null;
+        if (TextUtils.equals(tag, AccountRemovalJob.TAG)) {
+            return new AccountRemovalJob(uploadsStorageManager,
+                                         accountManager,
+                                         backgroundJobManager,
+                                         clock,
+                                         eventBus);
+        } else {
+            return null;
         }
     }
 }
