@@ -88,6 +88,7 @@ class NotificationWork constructor(
         private const val NUMERIC_NOTIFICATION_ID = "NUMERIC_NOTIFICATION_ID"
     }
 
+    @Suppress("NestedBlockDepth", "ComplexMethod", "LongMethod") // legacy code
     override fun doWork(): Result {
         val subject = inputData.getString(KEY_NOTIFICATION_SUBJECT) ?: ""
         val signature = inputData.getString(KEY_NOTIFICATION_SIGNATURE) ?: ""
@@ -225,15 +226,19 @@ class NotificationWork constructor(
     }
 
     class NotificationReceiver : BroadcastReceiver() {
+        private var userAccountManager: UserAccountManager? = null
+
         @Inject
-        var accountManager: UserAccountManager? = null
+        fun setUserAccountManager(uac: UserAccountManager) {
+            this.userAccountManager = uac
+        }
 
         override fun onReceive(context: Context, intent: Intent) {
             AndroidInjection.inject(this, context)
             val numericNotificationId = intent.getIntExtra(NUMERIC_NOTIFICATION_ID, 0)
             val accountName = intent.getStringExtra(KEY_NOTIFICATION_ACCOUNT)
             if (numericNotificationId != 0) {
-                Thread(label@ Runnable {
+                Thread(Runnable {
                     val notificationManager = context.getSystemService(
                         Activity.NOTIFICATION_SERVICE) as NotificationManager
                     var oldNotification: android.app.Notification? = null
@@ -247,10 +252,10 @@ class NotificationWork constructor(
                         cancel(context, numericNotificationId)
                     }
                     try {
-                        val optionalUser = accountManager!!.getUser(accountName)
+                        val optionalUser = userAccountManager!!.getUser(accountName)
                         if (!optionalUser.isPresent) {
                             Log_OC.e(this, "Account may not be null")
-                            return@label
+                            return@Runnable
                         }
                         val user = optionalUser.get()
                         val client = OwnCloudClientManagerFactory.getDefaultSingleton()
