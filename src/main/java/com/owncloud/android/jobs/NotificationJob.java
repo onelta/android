@@ -43,8 +43,8 @@ import com.evernote.android.job.util.support.PersistableBundleCompat;
 import com.google.gson.Gson;
 import com.nextcloud.client.account.User;
 import com.nextcloud.client.account.UserAccountManager;
-import com.nextcloud.client.integration.deck.DeckActionOverride;
-import com.nextcloud.client.integration.deck.DeckActionOverrideImpl;
+import com.nextcloud.client.integration.deck.DeckApi;
+import com.nextcloud.client.integration.deck.DeckApiImpl;
 import com.nextcloud.java.util.Optional;
 import com.owncloud.android.R;
 import com.owncloud.android.datamodel.DecryptedPushMessage;
@@ -162,9 +162,9 @@ public class NotificationJob extends Job {
         SecureRandom randomId = new SecureRandom();
         RichObject file = notification.subjectRichParameters.get("file");
 
-        final DeckActionOverride deckDeckActionOverride = new DeckActionOverrideImpl(context);
-        Optional<PendingIntent> deckActionOverrideIntent = deckDeckActionOverride.handleNotification(notification,
-                                                                                                     user);
+        final DeckApi deckDeckApi = new DeckApiImpl(context);
+        final Optional<PendingIntent> deckActionOverrideIntent = deckDeckApi.createForwardToDeckActionIntent(notification,
+                                                                                                             user);
         final PendingIntent pendingIntent;
         if (deckActionOverrideIntent.isPresent()) {
             pendingIntent = deckActionOverrideIntent.get();
