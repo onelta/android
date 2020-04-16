@@ -43,10 +43,8 @@ import com.evernote.android.job.util.support.PersistableBundleCompat;
 import com.google.gson.Gson;
 import com.nextcloud.client.account.User;
 import com.nextcloud.client.account.UserAccountManager;
-import com.nextcloud.client.integration.AppCannotHandleNotificationException;
-import com.nextcloud.client.integration.AppNotInstalledException;
-import com.nextcloud.client.integration.NotificationHandler;
-import com.nextcloud.client.integration.deck.DeckNotificationHandler;
+import com.nextcloud.client.integration.deck.DeckActionOverride;
+import com.nextcloud.client.integration.deck.DeckActionOverrideImpl;
 import com.nextcloud.java.util.Optional;
 import com.owncloud.android.R;
 import com.owncloud.android.datamodel.DecryptedPushMessage;
@@ -164,11 +162,14 @@ public class NotificationJob extends Job {
         SecureRandom randomId = new SecureRandom();
         RichObject file = notification.subjectRichParameters.get("file");
 
-        final NotificationHandler deckNotificationHandler = new DeckNotificationHandler(context);
-        Intent intent;
-        try {
-            intent = deckNotificationHandler.handleNotification(notification, user);
-        } catch (AppNotInstalledException | AppCannotHandleNotificationException e) {
+        final DeckActionOverride deckDeckActionOverride = new DeckActionOverrideImpl(context);
+        Optional<PendingIntent> deckActionOverrideIntent = deckDeckActionOverride.handleNotification(notification,
+                                                                                                     user);
+        final PendingIntent pendingIntent;
+        if (deckActionOverrideIntent.isPresent()) {
+            pendingIntent = deckActionOverrideIntent.get();
+        } else {
+            Intent intent;
             if (file == null) {
                 intent = new Intent(context, NotificationsActivity.class);
             } else {
@@ -178,9 +179,9 @@ public class NotificationJob extends Job {
             }
             intent.putExtra(KEY_NOTIFICATION_ACCOUNT, user.getAccountName());
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        }
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+            pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+        }
         int pushNotificationId = randomId.nextInt();
 
         NotificationCompat.Builder notificationBuilder =
