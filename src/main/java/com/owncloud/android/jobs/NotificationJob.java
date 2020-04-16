@@ -43,6 +43,10 @@ import com.evernote.android.job.util.support.PersistableBundleCompat;
 import com.google.gson.Gson;
 import com.nextcloud.client.account.User;
 import com.nextcloud.client.account.UserAccountManager;
+import com.nextcloud.client.integration.NotificationHandler;
+import com.nextcloud.client.integration.NotificationHandler.AppCannotHandelNotificationException;
+import com.nextcloud.client.integration.NotificationHandler.AppNotInstalledException;
+import com.nextcloud.client.integration.deck.DeckNotificationHandler;
 import com.nextcloud.java.util.Optional;
 import com.owncloud.android.R;
 import com.owncloud.android.datamodel.DecryptedPushMessage;
@@ -81,7 +85,6 @@ import javax.crypto.NoSuchPaddingException;
 import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import dagger.android.AndroidInjection;
@@ -161,13 +164,11 @@ public class NotificationJob extends Job {
         SecureRandom randomId = new SecureRandom();
         RichObject file = notification.subjectRichParameters.get("file");
 
+        final NotificationHandler deckNotificationHandler = new DeckNotificationHandler(context);
         Intent intent;
-        if ("deck".equalsIgnoreCase(notification.app)) {
-            intent = getDeckIntent(notification, user);
-            if (intent == null) { // Fallback if Deck app is not installed
-                intent = new Intent(context, NotificationsActivity.class);
-            }
-        } else {
+        try {
+            intent = deckNotificationHandler.handleNotification(notification, user);
+        } catch (AppNotInstalledException | AppCannotHandelNotificationException e) {
             if (file == null) {
                 intent = new Intent(context, NotificationsActivity.class);
             } else {
@@ -249,36 +250,6 @@ public class NotificationJob extends Job {
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
         notificationManager.notify(notification.getNotificationId(), notificationBuilder.build());
-    }
-
-    /**
-     * Returns an intent to start the Deck app if it is installed. If it is not installed, it will return null.
-     */
-    @Nullable
-    private Intent getDeckIntent(@NonNull final Notification notification, @NonNull final User user) {
-        final String baseDeckApplicationId = "it.niedermann.nextcloud.deck";
-        final String activityToStart = "it.niedermann.nextcloud.deck.ui.PushNotificationActivity";
-        final String[] flavors = new String[]{"", ".play", ".dev"};
-        for (String flavor : flavors) {
-            final Intent intent = new Intent().setClassName(baseDeckApplicationId + flavor, activityToStart);
-            if (context.getPackageManager().resolveActivity(
-                intent, 0) != null) {
-                Log.i(TAG, "Found deck app flavor \"" + flavor + "\"");
-                return intent
-                    .putExtra("account", user.getAccountName())
-                    .putExtra("link", notification.getLink())
-                    .putExtra("objectId", notification.getObjectId())
-                    .putExtra("subject", notification.getSubject())
-                    .putExtra("subjectRich", notification.getSubjectRich())
-                    .putExtra("message", notification.getMessage())
-                    .putExtra("messageRich", notification.getMessageRich())
-                    .putExtra("user", notification.getUser())
-                    .putExtra("nid", notification.getNotificationId())
-                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            }
-        }
-        Log.v(TAG, "Couldn't find any installed deck app.");
-        return null;
     }
 
     private void fetchCompleteNotification(User account, DecryptedPushMessage decryptedPushMessage) {
