@@ -169,7 +169,7 @@ public class NotificationJob extends Job {
         if (deckActionOverrideIntent.isPresent()) {
             pendingIntent = deckActionOverrideIntent.get();
         } else {
-            Intent intent;
+            final Intent intent;
             if (file == null) {
                 intent = new Intent(context, NotificationsActivity.class);
             } else {
