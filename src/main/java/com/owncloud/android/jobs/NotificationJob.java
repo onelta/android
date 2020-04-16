@@ -43,7 +43,7 @@ import com.evernote.android.job.util.support.PersistableBundleCompat;
 import com.google.gson.Gson;
 import com.nextcloud.client.account.User;
 import com.nextcloud.client.account.UserAccountManager;
-import com.nextcloud.client.integration.AppCannotHandelNotificationException;
+import com.nextcloud.client.integration.AppCannotHandleNotificationException;
 import com.nextcloud.client.integration.AppNotInstalledException;
 import com.nextcloud.client.integration.NotificationHandler;
 import com.nextcloud.client.integration.deck.DeckNotificationHandler;
@@ -168,7 +168,7 @@ public class NotificationJob extends Job {
         Intent intent;
         try {
             intent = deckNotificationHandler.handleNotification(notification, user);
-        } catch (AppNotInstalledException | AppCannotHandelNotificationException e) {
+        } catch (AppNotInstalledException | AppCannotHandleNotificationException e) {
             if (file == null) {
                 intent = new Intent(context, NotificationsActivity.class);
             } else {
