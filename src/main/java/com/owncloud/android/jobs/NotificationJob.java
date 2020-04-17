@@ -162,7 +162,7 @@ public class NotificationJob extends Job {
         SecureRandom randomId = new SecureRandom();
         RichObject file = notification.subjectRichParameters.get("file");
 
-        final DeckApi deckDeckApi = new DeckApiImpl(context);
+        final DeckApi deckDeckApi = new DeckApiImpl(context, context.getPackageManager());
         final Optional<PendingIntent> deckActionOverrideIntent = deckDeckApi.createForwardToDeckActionIntent(notification,
                                                                                                              user);
         final PendingIntent pendingIntent;
