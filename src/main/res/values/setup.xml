@@ -6,13 +6,16 @@
 
     <!-- App name  and other strings-->
     <string name="app_name">INODESKTOP</string>
-    <string name="account_type">nextcloud</string>     <!-- better if was a domain name; but changing it now would require migrate accounts when the app is updated -->
-    <string name="authority">org.nextcloud</string>    <!-- better if was the app package with ".provider" appended ; it identifies the provider -->
-    <string name="users_and_groups_search_authority">com.nextcloud.android.providers.UsersAndGroupsSearchProvider</string>
-    <string name="users_and_groups_share_with">com.nextcloud.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
-    <string name="document_provider_authority">org.nextcloud.documents</string>
-    <string name="file_provider_authority">org.nextcloud.files</string>
-    <string name="image_cache_provider_authority">org.nextcloud.imageCache.provider</string>
+    <string name="account_type">inolawyer</string>     <!-- better if was a domain name; but changing it now would
+    require migrate accounts when the app is updated -->
+    <string name="authority">org.inolawyer</string>    <!-- better if was the app package with ".provider" appended ;
+     it identifies the provider -->
+    <string name="users_and_groups_search_authority">com.inolawyer.android.providers
+        .UsersAndGroupsSearchProvider</string>
+    <string name="users_and_groups_share_with">com.inolawyer.android.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
+    <string name="document_provider_authority">org.inolawyer.documents</string>
+    <string name="file_provider_authority">org.inolawyer.files</string>
+    <string name="image_cache_provider_authority">org.inolawyer.imageCache.provider</string>
     <string name="db_file">inolawyer.db</string>
     <string name="db_name">inolawyer</string>
     <string name="data_folder">inolawyer</string>
@@ -24,7 +27,7 @@
     <string name="server_url">https://my.inolawyer.com</string>
     <bool name="show_server_url_input">true</bool>
     <bool name="show_provider_or_own_installation">true</bool>
-    <string name="provider_registration_server">https://www.nextcloud.com/register</string>
+    <string name="provider_registration_server">https://inolawyer.com/en/signup</string>
 
     <!-- Flags to enable/disable some features -->
     <string name="send_files_to_other_apps">on</string>
@@ -77,12 +80,12 @@
     <bool name="recommend_enabled">true</bool>
     <bool name="logger_enabled">false</bool>
     <bool name="sourcecode_enabled">true</bool>
-    <string name="sourcecode_url" translatable="false">https://github.com/nextcloud/android</string>
+    <string name="sourcecode_url" translatable="false">https://github.com/onelta/android</string>
     <bool name="license_enabled">true</bool>
     <string name="license_url" translatable="false">https://www.gnu.org/licenses/gpl-2.0.html</string>
     <string name="url_imprint"></string>
-    <string name="url_app_download">"https://play.google.com/store/apps/details?id=com.nextcloud.client"</string>
-    <string name="url_server_install">https://nextcloud.com/install</string>
+    <string name="url_app_download">"https://play.google.com/store/apps/details?id=com.inolawyer.client"</string>
+    <string name="url_server_install">https://inolawyer.com/clients</string>
 
     <!-- synced folder light; if enabled: move to setting & global upload settings -->
     <bool name="syncedFolder_light">false</bool>
@@ -99,8 +102,8 @@
     <!-- Participate links -->
     <string name="fdroid_beta_link" translatable="false">https://f-droid.org/repository/browse/?fdid=com.nextcloud.android.beta</string>
     <string name="beta_apk_link" translatable="false">https://download.nextcloud.com/android/dev/latest.apk</string>
-    <string name="play_store_register_beta" translatable="false">https://play.google.com/apps/testing/com.nextcloud.client</string>
-    <string name="fdroid_link" translatable="false">https://f-droid.org/repository/browse/?fdid=com.nextcloud.client</string>
+    <string name="play_store_register_beta" translatable="false">https://play.google.com/apps/testing/com.inolawyer.client</string>
+    <string name="fdroid_link" translatable="false">https://f-droid.org/repository/browse/?fdid=com.inolawyer.client</string>
     <string name="irc_weblink" translatable="false">http://webchat.freenode.net?channels=nextcloud-mobile</string>
     <string name="help_link" translatable="false">https://help.nextcloud.com/c/clients/android</string>
     <string name="translation_link" translatable="false">https://www.transifex.com/nextcloud/nextcloud/android/</string>
