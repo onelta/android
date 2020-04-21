@@ -166,12 +166,12 @@ android {
         productFlavors {
             // used for f-droid
             generic {
-                applicationId 'com.inolawyer.client'
+                applicationId 'com.inolawyer.android'
                 dimension "default"
             }
 
             gplay {
-                applicationId 'com.inolawyer.client'
+                applicationId 'com.inolawyer.android'
                 dimension "default"
             }
 
