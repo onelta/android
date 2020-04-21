@@ -100,14 +100,15 @@
     <!-- Determine is participate enabled -->
     <bool name="participate_enabled">true</bool>
     <!-- Participate links -->
-    <string name="fdroid_beta_link" translatable="false">https://f-droid.org/repository/browse/?fdid=com.nextcloud.android.beta</string>
-    <string name="beta_apk_link" translatable="false">https://download.nextcloud.com/android/dev/latest.apk</string>
+    <string name="fdroid_beta_link" translatable="false">https://f-droid.org/repository/browse/?fdid=com.inolawyer.android.beta</string>
+    <string name="beta_apk_link" translatable="false">https://static.onelta.com/desktop/android/latest.apk</string>
     <string name="play_store_register_beta" translatable="false">https://play.google.com/apps/testing/com.inolawyer.android</string>
     <string name="fdroid_link" translatable="false">https://f-droid.org/repository/browse/?fdid=com.inolawyer.android</string>
-    <string name="irc_weblink" translatable="false">http://webchat.freenode.net?channels=nextcloud-mobile</string>
-    <string name="help_link" translatable="false">https://help.nextcloud.com/c/clients/android</string>
-    <string name="translation_link" translatable="false">https://www.transifex.com/nextcloud/nextcloud/android/</string>
-    <string name="contributing_link" translatable="false">https://github.com/nextcloud/android/blob/master/CONTRIBUTING.md</string>
+    <string name="irc_weblink" translatable="false">http://webchat.freenode.net?channels=inolawyer-mobile</string>
+    <string name="help_link" translatable="false">https://help.inolawyer.com/c/clients/android</string>
+    <string name="translation_link" translatable="false">https://www.transifex.com/onelta/inolawyer/android/</string>
+    <string name="contributing_link" translatable="false">https://github.com/onelta/android/blob/master/CONTRIBUTING
+        .md</string>
     <string name="report_issue_link" translatable="false">https://github.com/nextcloud/android/issues/new/choose</string>
 
     <!-- login data links -->
@@ -124,9 +125,9 @@
     <string name="push_server_url" translatable="false"></string>
 
     <!-- Dev settings -->
-    <string name="dev_link">https://download.nextcloud.com/android/dev/nextcloud-dev-</string>
-    <string name="dev_latest">https://download.nextcloud.com/android/dev/latest</string>
-    <string name="dev_changelog">https://github.com/nextcloud/android/raw/dev/CHANGELOG.md</string>
+    <string name="dev_link">https://static.onelta.com/desktop/</string>
+    <string name="dev_latest">https://static.onelta.com/desktop/</string>
+    <string name="dev_changelog">https://github.com/onelta/android/raw/dev/CHANGELOG.md</string>
 
     <string name="buildNumber" translatable="false"></string>
 </resources>
