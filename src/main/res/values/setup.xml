@@ -5,27 +5,27 @@
     <bool name="dev_version_direct_download_enabled">false</bool>
 
     <!-- App name  and other strings-->
-    <string name="app_name">INODESKTOP</string>
+    <string name="app_name">InoDocs</string>
     <string name="account_type">inolawyer</string>     <!-- better if was a domain name; but changing it now would
     require migrate accounts when the app is updated -->
     <string name="authority">org.inolawyer</string>    <!-- better if was the app package with ".provider" appended ;
      it identifies the provider -->
-    <string name="users_and_groups_search_authority">com.inolawyer.client.providers.UsersAndGroupsSearchProvider</string>
-    <string name="users_and_groups_share_with">com.inolawyer.client.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
-    <string name="document_provider_authority">org.inolawyer.documents</string>
-    <string name="file_provider_authority">org.inolawyer.files</string>
-    <string name="image_cache_provider_authority">org.inolawyer.imageCache.provider</string>
-    <string name="db_file">inolawyer.db</string>
-    <string name="db_name">inolawyer</string>
-    <string name="data_folder">inolawyer</string>
-    <string name="default_display_name_for_root_folder">Inolawyer</string>
-    <string name="nextcloud_user_agent">Mozilla/5.0 (Android) Inolawyer-client/%1$s</string>
-    <string name="only_office_user_agent">Mozilla/5.0 (Android %1$s) Mobile Inolawyer-client/%2$s</string>
+    <string name="users_and_groups_search_authority">com.inolawyer.inodocs.providers.UsersAndGroupsSearchProvider</string>
+    <string name="users_and_groups_share_with">com.inolawyer.inodocs.providers.UsersAndGroupsSearchProvider.action.SHARE_WITH</string>
+    <string name="document_provider_authority">com.inolawyer.inodocs.documents</string>
+    <string name="file_provider_authority">com.inolawyer.inodocs.files</string>
+    <string name="image_cache_provider_authority">com.inolawyer.inodocs.imageCache.provider</string>
+    <string name="db_file">InoDocs.db</string>
+    <string name="db_name">InoDocs</string>
+    <string name="data_folder">InoDocs</string>
+    <string name="default_display_name_for_root_folder">InoDocs</string>
+    <string name="nextcloud_user_agent">Mozilla/5.0 (Android) InoDocs/%1$s</string>
+    <string name="only_office_user_agent">Mozilla/5.0 (Android %1$s) Mobile InoDocs/%2$s</string>
 
     <!-- URLs and flags related -->
     <string name="server_url">https://my.inolawyer.com</string>
-    <bool name="show_server_url_input">true</bool>
-    <bool name="show_provider_or_own_installation">true</bool>
+    <bool name="show_server_url_input">false</bool>
+    <bool name="show_provider_or_own_installation">false</bool>
     <string name="provider_registration_server">https://inolawyer.com/en/signup</string>
 
     <!-- Flags to enable/disable some features -->
@@ -72,7 +72,7 @@
     <bool name="show_hidden_files_enabled">true</bool>
     <bool name="davdroid_integration_enabled">true</bool>
     <bool name="help_enabled">true</bool>
-    <string name="url_help">https://help.inolawyer.com/c/feature</string>
+    <string name="url_help">https://inolawyer.com/en/getting-started-android</string>
     <bool name="privacy_enabled">true</bool>
     <string name="privacy_url">https://inolawyer.com/en/privacy-policy</string>
     <bool name="imprint_enabled">false</bool>
@@ -83,8 +83,8 @@
     <bool name="license_enabled">true</bool>
     <string name="license_url" translatable="false">https://www.gnu.org/licenses/gpl-2.0.html</string>
     <string name="url_imprint"></string>
-    <string name="url_app_download">"https://play.google.com/store/apps/details?id=com.inolawyer.client"</string>
-    <string name="url_server_install">https://inolawyer.com/clients</string>
+    <string name="url_app_download">"https://play.google.com/store/apps/details?id=com.inolawyer.inodocs"</string>
+    <string name="url_server_install">https://inolawyer.com/en/signup</string>
 
     <!-- synced folder light; if enabled: move to setting & global upload settings -->
     <bool name="syncedFolder_light">false</bool>
@@ -99,10 +99,10 @@
     <!-- Determine is participate enabled -->
     <bool name="participate_enabled">true</bool>
     <!-- Participate links -->
-    <string name="fdroid_beta_link" translatable="false">https://f-droid.org/repository/browse/?fdid=com.inolawyer.client.beta</string>
+    <string name="fdroid_beta_link" translatable="false">https://f-droid.org/repository/browse/?fdid=com.inolawyer.inodocs.beta</string>
     <string name="beta_apk_link" translatable="false">https://static.onelta.com/desktop/android/latest.apk</string>
-    <string name="play_store_register_beta" translatable="false">https://play.google.com/apps/testing/com.inolawyer.client</string>
-    <string name="fdroid_link" translatable="false">https://f-droid.org/repository/browse/?fdid=com.inolawyer.client</string>
+    <string name="play_store_register_beta" translatable="false">https://play.google.com/apps/testing/com.inolawyer.inodocs</string>
+    <string name="fdroid_link" translatable="false">https://f-droid.org/repository/browse/?fdid=com.inolawyer.inodocs</string>
     <string name="irc_weblink" translatable="false">http://webchat.freenode.net?channels=inolawyer-mobile</string>
     <string name="help_link" translatable="false">https://help.inolawyer.com/c/clients/android</string>
     <string name="translation_link" translatable="false">https://www.transifex.com/onelta/inolawyer/android/</string>
